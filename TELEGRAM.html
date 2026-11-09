@@ -1,0 +1,502 @@
+html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$TG | The Global Trench Movement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tgBlue: '#2AABEE',
+                        tgDark: '#17212B',
+                        solGreen: '#14F195',
+                        solPurple: '#9945FF',
+                        solDark: '#000000',
+                        neonCyan: '#00F0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scanline': 'scanline 8s linear infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 10px #2AABEE, 0 0 20px #2AABEE' },
+                            '100%': { boxShadow: '0 0 20px #14F195, 0 0 40px #9945FF' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2AABEE;
+            border-radius: 4px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(42, 171, 238, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: #14F195;
+            box-shadow: 0 0 15px rgba(20, 241, 149, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Solana Gradient Text */
+        .sol-gradient-text {
+            background: linear-gradient(90deg, #2AABEE, #14F195, #9945FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        }
+
+        /* Neon Button */
+        .btn-neon {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, #2AABEE, #14F195);
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0.2;
+        }
+        .btn-neon:hover::before {
+            opacity: 1;
+        }
+        .btn-neon:hover {
+            box-shadow: 0 0 20px rgba(42, 171, 238, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-tgBlue selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 bg-grid z-0 pointer-events-none"></div>
+    <div class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-tgBlue via-solGreen to-solPurple z-50"></div>
+
+    <!-- Floating Particles (CSS Only approximation) -->
+    <div class="fixed top-1/4 left-1/4 w-64 h-64 bg-tgBlue rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse-fast"></div>
+    <div class="fixed bottom-1/4 right-1/4 w-80 h-80 bg-solPurple rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse-fast" style="animation-delay: 1s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 glass-panel border-b-0 border-b-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <!-- Logo Icon -->
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-tgBlue to-blue-600 flex items-center justify-center shadow-[0_0_15px_rgba(42,171,238,0.5)]">
+                        <i class="fa-solid fa-paper-plane text-white text-sm transform -rotate-45"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-wider">$TG</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#thesis" class="hover:text-tgBlue transition-colors px-3 py-2 rounded-md text-sm font-medium">Thesis</a>
+                        <a href="#stats" class="hover:text-tgBlue transition-colors px-3 py-2 rounded-md text-sm font-medium">Live Stats</a>
+                        <a href="#roadmap" class="hover:text-tgBlue transition-colors px-3 py-2 rounded-md text-sm font-medium">Mission</a>
+                        <button onclick="copyContract()" class="bg-white/10 hover:bg-white/20 text-xs font-mono py-2 px-4 rounded border border-white/10 transition-all flex items-center gap-2">
+                            <span id="nav-contract">CA: 8x...Sol</span>
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class="btn-neon bg-white text-black font-bold py-2 px-6 rounded-full flex items-center gap-2">
+                        <i class="fa-brands fa-telegram"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-tgBlue/30 mb-8 animate-float">
+                <span class="w-2 h-2 rounded-full bg-solGreen animate-pulse"></span>
+                <span class="text-xs font-mono text-solGreen uppercase tracking-widest">Signal Moving • Solana Native</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6">
+                X VANISHED. <br>
+                <span class="sol-gradient-text">THE TRENCH MOVED HERE.</span>
+            </h1>
+
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 font-light">
+                The global coordination hub for the Solana ecosystem. <br>
+                Telegram scale. Trench culture. Unstoppable momentum.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="btn-neon bg-tgBlue hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-lg text-lg shadow-[0_0_20px_rgba(42,171,238,0.4)] flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-telegram"></i> Join Telegram
+                </a>
+                <a href="#thesis" class="glass-card hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg text-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-contract"></i> View Thesis
+                </a>
+            </div>
+
+            <!-- Animated Coin Visual -->
+            <div class="mt-16 relative w-48 h-48 mx-auto animate-float">
+                <div class="absolute inset-0 bg-gradient-to-r from-tgBlue to-solPurple rounded-full blur-2xl opacity-40"></div>
+                <div class="relative w-full h-full bg-black rounded-full border-2 border-white/20 flex items-center justify-center glass-panel shadow-2xl">
+                    <i class="fa-solid fa-paper-plane text-6xl text-white transform -rotate-45 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"></i>
+                </div>
+                <!-- Orbiting elements -->
+                <div class="absolute -top-4 -right-4 w-12 h-12 bg-solGreen rounded-full blur-md animate-pulse"></div>
+                <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-tgBlue rounded-full blur-md animate-pulse" style="animation-delay: 0.5s"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Ticker -->
+    <div class="w-full bg-black/50 border-y border-white/5 overflow-hidden py-3 relative z-20">
+        <div class="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]" id="ticker">
+            <!-- JS will populate this -->
+            <span class="mx-4 text-sm font-mono text-gray-400">LATEST RAID: 450 USERS • NEW ATH IMMINENT • DEV STREAK: DAY 22 • SUPPLY LOCK: VERIFIED •</span>
+            <span class="mx-4 text-sm font-mono text-tgBlue">JOIN TG NOW •</span>
+            <span class="mx-4 text-sm font-mono text-solGreen">SOLANA SPEED •</span>
+            <span class="mx-4 text-sm font-mono text-gray-400">LATEST RAID: 450 USERS • NEW ATH IMMINENT • DEV STREAK: DAY 22 • SUPPLY LOCK: VERIFIED •</span>
+        </div>
+    </div>
+
+    <!-- Thesis Section -->
+    <section id="thesis" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why <span class="text-tgBlue">$TG</span> Wins</h2>
+                <div class="h-1 w-20 bg-gradient-to-r from-tgBlue to-solPurple mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-brands fa-telegram text-6xl"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-tgBlue/20 rounded-lg flex items-center justify-center mb-6 text-tgBlue">
+                        <i class="fa-solid fa-users text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">The New Trench Home</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        X communities are fractured. Telegram is the centralized hub where millions organize. We are the native token of that coordination.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-bolt text-6xl"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-solGreen/20 rounded-lg flex items-center justify-center mb-6 text-solGreen">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Solana Speed</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Built on the fastest chain. Instant transactions for raids, tipping, and community rewards. No lag, just pure signal.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-globe text-6xl"></i>
+                    </div>
+                    <div class="w-12 h-12 bg-solPurple/20 rounded-lg flex items-center justify-center mb-6 text-solPurple">
+                        <i class="fa-solid fa-earth-americas text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Global Reach</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Telegram has 800M+ users. We are tapping into the largest existing social graph in crypto. This isn't a niche; it's a movement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Stats / Dashboard -->
+    <section id="stats" class="py-20 bg-black/40 relative z-10 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Left: Text -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Live Trench <span class="text-solGreen">Pulse</span></h2>
+                    <p class="text-gray-400 mb-8">
+                        Real-time data from the command center. The community is active, the dev team is grinding, and the supply is secure.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 glass-panel rounded-lg border-l-4 border-solGreen">
+                            <span class="text-gray-400 text-sm font-mono">SUPPLY LOCKED</span>
+                            <span class="text-xl font-bold text-white">4.00%</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 glass-panel rounded-lg border-l-4 border-tgBlue">
+                            <span class="text-gray-400 text-sm font-mono">DEV/CTO STREAK</span>
+                            <span class="text-xl font-bold text-white"><span id="streak-counter">22</span> Days</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 glass-panel rounded-lg border-l-4 border-solPurple">
+                            <span class="text-gray-400 text-sm font-mono">ACTIVE RAIDERS</span>
+                            <span class="text-xl font-bold text-white" id="raider-count">1,240</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visualizer -->
+                <div class="relative h-80 glass-panel rounded-2xl p-6 overflow-hidden flex flex-col justify-between">
+                    <!-- Scanline -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-4 w-full animate-scanline pointer-events-none"></div>
+
+                    <div class="flex justify-between items-start">
+                        <div class="text-xs font-mono text-solGreen flex items-center gap-2">
+                            <span class="w-2 h-2 bg-solGreen rounded-full animate-pulse"></span> SYSTEM ONLINE
+                        </div>
+                        <div class="text-xs font-mono text-gray-500">LATENCY: 12ms</div>
+                    </div>
+
+                    <!-- Fake Graph -->
+                    <div class="flex items-end justify-between gap-1 h-40 mt-4">
+                        <!-- Bars generated by JS for randomness -->
+                        <div class="w-full bg-tgBlue/20 h-[40%] rounded-t hover:bg-tgBlue/50 transition-colors"></div>
+                        <div class="w-full bg-tgBlue/30 h-[60%] rounded-t hover:bg-tgBlue/50 transition-colors"></div>
+                        <div class="w-full bg-tgBlue/40 h-[30%] rounded-t hover:bg-tgBlue/50 transition-colors"></div>
+                        <div class="w-full bg-solGreen/40 h-[80%] rounded-t hover:bg-solGreen/50 transition-colors"></div>
+                        <div class="w-full bg-solGreen/60 h-[50%] rounded-t hover:bg-solGreen/50 transition-colors"></div>
+                        <div class="w-full bg-solPurple/40 h-[90%] rounded-t hover:bg-solPurple/50 transition-colors"></div>
+                        <div class="w-full bg-solPurple/60 h-[70%] rounded-t hover:bg-solPurple/50 transition-colors"></div>
+                        <div class="w-full bg-tgBlue/80 h-[95%] rounded-t shadow-[0_0_15px_#2AABEE]"></div>
+                    </div>
+
+                    <div class="flex justify-between items-end mt-4">
+                        <div class="text-xs font-mono text-gray-400">VOLUME (24H)</div>
+                        <div class="text-2xl font-bold font-mono text-white">$420,690</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap / Mission -->
+    <section id="roadmap" class="py-20 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Mission <span class="text-tgBlue">Timeline</span></h2>
+
+            <div class="relative border-l border-white/10 ml-4 md:ml-1/2 space-y-12">
+
+                <!-- Item 1 -->
+                <div class="relative pl-8 md:pl-0">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-solGreen shadow-[0_0_10px_#14F195]"></div>
+                    <div class="md:w-1/2 md:ml-auto md:pl-8">
+                        <div class="glass-card p-6 rounded-xl">
+                            <span class="text-xs font-mono text-solGreen mb-2 block">PHASE 1: COMPLETE</span>
+                            <h3 class="text-xl font-bold text-white">Signal Ignition</h3>
+                            <p class="text-gray-400 text-sm mt-2">Contract deployed, liquidity locked, initial community formation on Telegram.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative pl-8 md:pl-0">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-tgBlue shadow-[0_0_10px_#2AABEE]"></div>
+                    <div class="md:w-1/2 md:mr-auto md:pr-8 md:text-right">
+                        <div class="glass-card p-6 rounded-xl">
+                            <span class="text-xs font-mono text-tgBlue mb-2 block">PHASE 2: CURRENT</span>
+                            <h3 class="text-xl font-bold text-white">Trench Expansion</h3>
+                            <p class="text-gray-400 text-sm mt-2">Aggressive raiding, CEX listings applications, influencer partnerships, meme warfare.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative pl-8 md:pl-0">
+                    <div class="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-solPurple shadow-[0_0_10px_#9945FF]"></div>
+                    <div class="md:w-1/2 md:ml-auto md:pl-8">
+                        <div class="glass-card p-6 rounded-xl opacity-75 hover:opacity-100 transition-opacity">
+                            <span class="text-xs font-mono text-solPurple mb-2 block">PHASE 3: UPCOMING</span>
+                            <h3 class="text-xl font-bold text-white">Global Takeover</h3>
+                            <p class="text-gray-400 text-sm mt-2">Tier 1 Listings, $TG utility integration within Telegram bots, ecosystem grants.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Community / Meme Wall -->
+    <section class="py-20 bg-gradient-to-b from-black to-tgDark/20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Community <span class="sol-gradient-text">Noise</span></h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Placeholders for memes -->
+                <div class="aspect-square bg-white/5 rounded-lg flex items-center justify-center border border-white/10 hover:border-tgBlue transition-colors cursor-pointer group">
+                    <span class="text-gray-500 group-hover:text-white"><i class="fa-solid fa-image text-2xl"></i></span>
+                </div>
+                <div class="aspect-square bg-white/5 rounded-lg flex items-center justify-center border border-white/10 hover:border-tgBlue transition-colors cursor-pointer group">
+                    <span class="text-gray-500 group-hover:text-white"><i class="fa-solid fa-image text-2xl"></i></span>
+                </div>
+                <div class="aspect-square bg-white/5 rounded-lg flex items-center justify-center border border-white/10 hover:border-tgBlue transition-colors cursor-pointer group">
+                    <span class="text-gray-500 group-hover:text-white"><i class="fa-solid fa-image text-2xl"></i></span>
+                </div>
+                <div class="aspect-square bg-white/5 rounded-lg flex items-center justify-center border border-white/10 hover:border-tgBlue transition-colors cursor-pointer group">
+                    <span class="text-gray-500 group-hover:text-white"><i class="fa-solid fa-plus text-2xl"></i></span>
+                </div>
+            </div>
+            <p class="mt-6 text-sm text-gray-500">Submit your memes in the Telegram group to be featured.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-black pt-16 pb-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center gap-3 mb-4 md:mb-0">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-tgBlue to-blue-600 flex items-center justify-center">
+                        <i class="fa-solid fa-paper-plane text-white text-xs transform -rotate-45"></i>
+                    </div>
+                    <span class="font-bold text-lg">$TG</span>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-tgBlue transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-tgBlue transition-colors"><i class="fa-brands fa-telegram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-tgBlue transition-colors"><i class="fa-brands fa-discord text-xl"></i></a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-mono">
+                <div class="mb-4 md:mb-0">
+                    <p>Contract: <span id="footer-contract" class="text-white cursor-pointer hover:text-tgBlue" onclick="copyContract()">8x...Sol (Click to Copy)</span></p>
+                </div>
+                <div>
+                    <p>&copy; 2024 $TG Community. Not financial advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button (Mobile) -->
+    <a href="#" class="fixed bottom-6 right-6 z-50 bg-tgBlue text-white p-4 rounded-full shadow-[0_0_20px_rgba(42,171,238,0.6)] md:hidden hover:scale-110 transition-transform">
+        <i class="fa-brands fa-telegram text-xl"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Contract Address Logic
+        const contractAddress = "8x...SolanaContractAddressHere..."; // Replace with real CA
+
+        function copyContract() {
+            navigator.clipboard.writeText(contractAddress).then(() => {
+                const originalText = document.getElementById('nav-contract').innerText;
+                const footerText = document.getElementById('footer-contract').innerText;
+
+                document.getElementById('nav-contract').innerText = "COPIED!";
+                document.getElementById('footer-contract').innerText = "COPIED TO CLIPBOARD";
+
+                setTimeout(() => {
+                    document.getElementById('nav-contract').innerText = "CA: " + contractAddress.substring(0, 6) + "...Sol";
+                    document.getElementById('footer-contract').innerText = contractAddress + " (Click to Copy)";
+                }, 2000);
+            });
+        }
+
+        // Live Stats Simulation
+        function updateStats() {
+            const raiderEl = document.getElementById('raider-count');
+            const currentRaider = parseInt(raiderEl.innerText.replace(',', ''));
+
+            // Randomly increase or decrease slightly to simulate activity
+            const change = Math.floor(Math.random() * 10) - 3;
+            const newRaider = currentRaider + change;
+
+            raiderEl.innerText = newRaider.toLocaleString();
+
+            // Random color flash on update
+            if(change > 0) {
+                raiderEl.classList.add('text-solGreen');
+                setTimeout(() => raiderEl.classList.remove('text-solGreen'), 500);
+            }
+        }
+
+        setInterval(updateStats, 3000);
+
+        // Streak Counter Logic (Simple increment for demo)
+        // In production, calculate this based on a fixed start date
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 22); // Set back 22 days
+
+        function updateStreak() {
+            const now = new Date();
+            const diffTime = Math.abs(now - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('streak-counter').innerText = diffDays;
+        }
+
+        setInterval(updateStreak, 60000); // Update every minute
+        updateStreak(); // Initial call
+
+    </script>
+</body>
+</html>
