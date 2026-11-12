@@ -1,0 +1,16 @@
+{
+  "name": "shaddai-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot for the SHADDAI ecosystem — signals, PnL, news, wallets, trading. Sends signals to @ShaddaiSignals channel.",
+  "main": "telegram-bot.js",
+  "scripts": {
+    "start": "node telegram-bot.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+'@
