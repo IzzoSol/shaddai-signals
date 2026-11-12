@@ -1,0 +1,20 @@
+<!-- ZA Auto-Trader Control Panel -->
+<div class="auto-trader-control" id="auto-trader-control">
+  <h3>🤖 Auto-Trader</h3>
+  <div class="settings">
+    <label>Starting Capital: $<input type="number" id="start-cap" value="200" min="50" max="1000"></label>
+    <label>Position Size %: <input type="number" id="pos-size" value="2" min="1" max="5"></label>
+    <label>Stop Loss %: <input type="number" id="sl" value="4" min="1" max="10"></label>
+    <label>Trail Activate %: <input type="number" id="trail" value="12" min="1" max="20"></label>
+    <label>Trail Gap %: <input type="number" id="gap" value="6" min="1" max="10"></label>
+  </div>
+  <div class="status" id="trading-status">Ready</div>
+  <button id="start-trading" class="btn-primary">Start Auto-Trading</button>
+  <button id="stop-trading" class="btn-secondary" disabled>Stop</button>
+</div>
+
+<!-- Portfolio Status Card -->
+<div class="portfolio-status" id="portfolio-status"></div>
+
+<!-- Connect ZA Engine Script -->
+<script src="scripts/auto-trader.js"></script>

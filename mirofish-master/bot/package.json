@@ -1,0 +1,14 @@
+{
+  "name": "za-signals-bot",
+  "version": "2.1.0",
+  "private": true,
+  "description": "ZA signals bot v2 — TA + rugcheck gate + TG/Discord broadcast + paper desk",
+  "scripts": {
+    "start": "node signals-bot.js",
+    "once": "node signals-bot.js --once",
+    "dry": "node signals-bot.js --once --dry-run",
+    "engine": "node engine.js",
+    "test": "node ta.js && node paper.js"
+  },
+  "engines": { "node": ">=18" }
+}

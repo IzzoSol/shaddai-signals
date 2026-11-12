@@ -1,0 +1,38 @@
+{
+  "agentName": "Zerox-AutoTrader",
+  "dailyCapUsd": 25.00,
+  "perCallCapUsd": 5.00,
+  "approvalThresholdUsd": 2.00,
+  "requireApproval": false,
+  "allowedTools": [
+    "zerox_market_scan",
+    "zerox_price",
+    "zerox_paper_open",
+    "zerox_paper_close",
+    "zerox_paper_portfolio",
+    "shaddai_rag_ask",
+    "shaddai_hall_astro"
+  ],
+  "description": "ZEROX-optimized auto-trader with SHADDAI MCP permitting and PIKADON security",
+  "version": "1.0.0",
+  "payboxIntegration": {
+    "enabled": true,
+    "baseUrl": "https://api.paybox.sh",
+    "tipCredentials": {
+      "ZEROX": "697a2d8a-142f-4aac-a17c-88637ec358c8"
+    },
+    "perTradeDeduction": true,
+    "dailyReset": "midnight_utc"
+  },
+  "strategyParameters": {
+    "stopLossPct": 4,
+    "trailActivatePct": 12,
+    "trailGapPct": 6,
+    "minHolders": 50,
+    "minLiquidityTvl": 20000,
+    "sourceFilter": "Trending",
+    "positionSizePct": 2,
+    "initialCapital": 200,
+    "simulateSlippage": 0.003
+  }
+}

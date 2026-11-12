@@ -1,0 +1,102 @@
+/* ── Newsstand header: one tidy row on desktop, hamburger + drawer under 900px ──────────
+   Fixes the old bar, where 15 wrapping links made a 280–360px sticky header on phones.
+   --stand-h is measured by nav.js so anchor jumps land below the bar at every width
+   (replaces the hard-coded 112px / 165px scroll-margins). */
+:root { --stand-h: 64px; }
+section[id], [id].anchor { scroll-margin-top: calc(var(--stand-h) + 12px) !important; }
+
+.stand { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.stand .wrap.stand-bar { display: flex; flex-wrap: nowrap; align-items: center; gap: 14px; padding-block: 10px; justify-content: flex-start; }
+
+.stand-brand { display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: inherit; flex: none; padding: 0 !important; line-height: 1; }
+.stand-brand b { font-size: 21px !important; }
+.stand-brand span { font-size: 10.5px; letter-spacing: .16em; opacity: .75; white-space: nowrap; }
+
+.stand .stand-nav { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; margin-left: auto; min-width: 0; }
+.stand-nav > a, .more-btn {
+  font: 600 13.5px/1 var(--cond); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+  padding: 9px 9px !important; border-radius: 8px; color: inherit; background: none; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px;
+}
+.stand-nav small { font-size: 9.5px; letter-spacing: .08em; padding: 2px 5px; border-radius: 4px; border: 1px solid currentColor; opacity: .7; }
+.stand-nav > a:hover, .more-btn:hover, .more-btn[aria-expanded="true"] { color: var(--gold); background: color-mix(in srgb, currentColor 9%, transparent); }
+.stand-nav > a[aria-current="true"] { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); }
+.stand a:focus-visible, .stand button:focus-visible, .drawer a:focus-visible, .drawer button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.more { position: relative; }
+.more-menu {
+  position: absolute; right: 0; top: calc(100% + 8px); min-width: 210px; padding: 8px; border-radius: 12px; z-index: 30;
+  display: grid; gap: 2px; background: var(--ink); color: var(--paper);
+  box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 0 0 1px color-mix(in srgb, var(--gold) 30%, transparent);
+}
+html:not([data-theme=pulp]) .more-menu { background: color-mix(in srgb, var(--paper) 96%, transparent); color: var(--ink); backdrop-filter: blur(14px); }
+.more-menu[hidden] { display: none; }
+.more-menu a { padding: 10px 12px !important; border-radius: 8px; font: 600 13px/1.1 var(--cond); letter-spacing: .1em; text-transform: uppercase; color: inherit !important; }
+.more-menu a:hover { background: color-mix(in srgb, currentColor 10%, transparent); color: var(--gold) !important; }
+
+/* SAP — the project tab, styled as a lit button so it reads as a destination, not a section */
+.sap-cta {
+  flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap;
+  font: 700 13px/1 var(--cond); letter-spacing: .12em; text-transform: uppercase;
+  padding: 10px 14px !important; border-radius: 999px; min-height: 38px;
+  color: #04140d !important; background: linear-gradient(180deg, #6dffab, #22c55e);
+  box-shadow: 0 0 0 1px rgba(77,255,154,.5), 0 6px 22px rgba(34,197,94,.35);
+  transition: transform .15s, box-shadow .15s;
+}
+.sap-cta:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px #4dff9a, 0 10px 30px rgba(34,197,94,.5); background: linear-gradient(180deg, #8dffbf, #2bd468) !important; color: #04140d !important; }
+.sap-cta i { width: 8px; height: 8px; border-radius: 50%; background: #04140d; box-shadow: 0 0 0 3px rgba(4,20,13,.18); animation: sapPulse 2.4s ease-in-out infinite; }
+.sap-cta span { font-weight: 600; opacity: .8; }
+@keyframes sapPulse { 50% { box-shadow: 0 0 0 6px rgba(4,20,13,0); } }
+@media (prefers-reduced-motion: reduce) { .sap-cta i { animation: none; } }
+
+.stand .theme-switch { flex: none; }
+
+.burger { display: none; flex: none; width: 44px; height: 44px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: none; color: inherit; cursor: pointer; padding: 0; position: relative; }
+.burger span { position: absolute; left: 12px; right: 12px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .25s, opacity .2s; }
+.burger span:nth-child(1) { top: 15px; } .burger span:nth-child(2) { top: 21px; } .burger span:nth-child(3) { top: 27px; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mid widths: drop the descriptive half of the SAP label before anything wraps */
+@media (max-width: 1600px) { .sap-cta span { display: none; } }
+@media (max-width: 1200px) { .stand .stand-nav > a:nth-of-type(5) { display: none; } /* The story → More/drawer */ }
+
+/* Under 900px: brand · SAP · themes · burger. Everything else lives in the drawer. */
+@media (max-width: 900px) {
+  .stand .stand-nav { display: none; }
+  .burger { display: inline-block; }
+  .stand .wrap.stand-bar { gap: 10px; }
+  .sap-cta { margin-left: auto; }
+}
+@media (max-width: 420px) {
+  .stand-brand span { display: none; }
+  .stand .theme-switch { display: none; }  /* themes move into the drawer */
+  .sap-cta { padding: 9px 12px !important; }
+}
+
+/* Drawer */
+.drawer { position: fixed; inset: 0; z-index: 60; }
+.drawer[hidden] { display: none; }
+.drawer-scrim { position: absolute; inset: 0; background: rgba(5,5,10,.55); backdrop-filter: blur(3px); animation: fadeIn .2s ease; }
+.drawer-panel {
+  position: absolute; top: 0; right: 0; bottom: 0; width: min(360px, 88vw); overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) calc(18px + env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) 18px;
+  background: var(--ink); color: var(--paper); box-shadow: -20px 0 60px rgba(0,0,0,.4);
+  display: flex; flex-direction: column; gap: 2px; animation: slideIn .28s cubic-bezier(.2,.8,.2,1);
+}
+html:not([data-theme=pulp]) .drawer-panel { background: var(--paper); color: var(--ink); }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.drawer-head b { font-family: var(--display); font-style: italic; color: var(--gold); font-size: 24px; font-weight: 400; }
+.drawer-x { width: 44px; height: 44px; border-radius: 10px; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); background: none; color: inherit; font-size: 18px; cursor: pointer; }
+.drawer h4 { margin: 16px 0 4px; font: 600 11px/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; opacity: .6; }
+.drawer-panel > a:not(.sap-cta) { display: flex; align-items: center; min-height: 44px; padding: 0 10px; border-radius: 9px; color: inherit; text-decoration: none; font: 600 16px/1 var(--cond); letter-spacing: .08em; text-transform: uppercase; }
+.drawer-panel > a:not(.sap-cta):hover, .drawer-panel > a:not(.sap-cta):active { background: color-mix(in srgb, currentColor 10%, transparent); color: var(--gold); }
+.sap-cta.wide { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; border-radius: 14px; padding: 14px 16px !important; min-height: 56px; font-size: 15px; }
+.sap-cta.wide small { flex-basis: 100%; padding-left: 16px; font: 500 12px/1.2 var(--cond); letter-spacing: .06em; text-transform: none; opacity: .8; }
+.drawer .theme-switch { margin-top: 18px; }
+body.drawer-open { overflow: hidden; }
+@keyframes slideIn { from { transform: translateX(100%); } }
+@keyframes fadeIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .drawer-panel, .drawer-scrim { animation: none; } }
+.more-menu .more-story { display: none; } @media (max-width: 1200px) { .more-menu .more-story { display: flex; } }
