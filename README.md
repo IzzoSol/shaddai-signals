@@ -32,6 +32,43 @@ Sends real-time crypto signals to the public Telegram channel [@ShaddaiSignals](
 - `lib/music-gen-node.js` — music generation (for bot audio)
 - `lib/pnl-images.js` — PnL chart image generation
 
+### SHADDAI Backend (MCP tools + signal routes)
+- `shaddai-backend/mcp-client.js` — MCP client for agent communication
+- `shaddai-backend/mcp-server-rag.js` — RAG-powered MCP server
+- `shaddai-backend/build-mcp-package.js` — MCP package builder
+- `shaddai-backend/routes/signal-*.js` — signal analysis, discovery, scoring, forensics, levels, meta-forensics
+- `shaddai-backend/routes/pro-signals.js` — pro-tier signals
+- `shaddai-backend/tools-defi.js` — DeFi tools
+- `shaddai-backend/tools-markets.js` — market data tools
+- `shaddai-backend/tools-news.js` — news tools
+- `shaddai-backend/tools-nexus.js` — NEXUS agent tools
+- `shaddai-backend/tools-research.js` — ORACLE research tools
+- `shaddai-backend/tools-data.js` — data tools
+
+### SHADDAI Agents MCP
+- `shaddai-agents-mcp/mcp.js` — MCP server for 7 agents + 48 NVIDIA skills
+- `shaddai-agents-mcp/nvidia-skills.json` — skill manifest
+- `shaddai-agents-mcp/README.md` — agent documentation
+
+### ZEROX Auto-Trader
+- `zerox-autotrader/` — full repo (paper trading engine, strategy routes, frontend dashboard, security audit)
+- See `zerox-autotrader/README.md` and `FINAL_SUMMARY.md`
+
+### TuFish (MiroFish Trading Terminal)
+- `mirofish-master/` — full repo (trading terminal + Telegram signals bot)
+- `mirofish-master/bot/` — engine, signals-bot, paper trading, TA, rugcheck
+- `mirofish-master/terminal/` — web trading dashboard
+- See `mirofish-master/README.md`
+
+### ASIMOV Trading Agent
+- `asimov-site/` — $ASIMOV Science Finance site + trading agent
+- `asimov-site/sap.html`, `sap-*.js` — trading terminal UI
+- `asimov-site/three-scenes.js`, `hero3d.js` — 3D visualizations
+- See `asimov-site/README.md`, `MASTER-PROMPT.md`
+
+### Signals Dashboard
+- `TELEGRAM.html` — web dashboard (signal feed, PnL charts, wallet balances, bot status)
+
 ### Infrastructure
 - `package.json` — dependencies (express)
 - `.env.example` — all environment variables documented

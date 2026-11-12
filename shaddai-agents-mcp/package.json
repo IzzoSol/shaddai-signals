@@ -1,0 +1,18 @@
+{
+  "name": "shaddai-agents-mcp",
+  "version": "0.2.0",
+  "description": "Use the 7 SHADDAI agents (real tools + agentic loop) and the curated NVIDIA/skills library (Omniverse, Cosmos, Earth2Studio climate AI, RAG, TAO) inside Claude Code, Cursor, or any MCP client. Zero-dependency; proxies to your running SHADDAI backend.",
+  "bin": { "shaddai-agents-mcp": "mcp.js" },
+  "main": "mcp.js",
+  "type": "commonjs",
+  "engines": { "node": ">=18" },
+  "files": ["mcp.js", "nvidia-skills.json", "build-nvidia-skills-manifest.js", "sync-nvidia-manifest.js", "README.md", "LICENSE"],
+  "scripts": {
+    "mcp": "node mcp.js",
+    "test": "node test-mcp.js",
+    "build:manifest": "node build-nvidia-skills-manifest.js",
+    "sync:manifest": "node sync-nvidia-manifest.js"
+  },
+  "keywords": ["mcp", "model-context-protocol", "agents", "shaddai", "claude", "cursor", "ai", "nvidia", "omniverse", "cosmos", "earth2studio", "tao", "rag"],
+  "license": "MIT"
+}
